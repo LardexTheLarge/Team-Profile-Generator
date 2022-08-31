@@ -93,7 +93,9 @@ function start() {
     if (answer.teamMake == "Yes") {
       addRole();
     } else {
-      console.log(answer);
+      console.log(Team);
+      // fs.writeFile("./dist/text.txt", Team);
+      process.exit(0);
     }
   });
 }
@@ -109,16 +111,42 @@ function addRole() {
   inquirer.prompt(addTeam).then((answer) => {
     if (answer.employeeMake === "Manager" && managerCounter < 1) {
       managerCounter++;
-      inquirer.prompt(teamMembers.Manager).then((results) => {}); //TODO: finish this code
+      inquirer.prompt(teamMembers.Manager).then((results) => {
+        const manager = new Manager(
+          results.managerName,
+          results.managerID,
+          results.managerEmail,
+          results.managerOffice
+        );
+        Team.push(manager);
+        start();
+      });
+    } else if (answer.employeeMake === "Engineer") {
+      inquirer.prompt(teamMembers.Engineer).then((results) => {
+        const engineer = new Engineer(
+          results.engineerName,
+          results.engineerID,
+          results.engineerEmail,
+          results.engUserName
+        );
+        Team.push(engineer);
+        start();
+      });
+    } else if (answer.employeeMake === "Intern") {
+      inquirer.prompt(teamMembers.Intern).then((results) => {
+        const intern = new Intern(
+          results.internName,
+          results.internID,
+          results.internEmail,
+          results.internSchool
+        );
+        Team.push(intern);
+        start();
+      });
     } else {
-      console.log(answer);
+      start();
     }
   });
 }
 
-function init() {
-  start();
-}
-
-// Function call to initialize app
-init();
+start();
