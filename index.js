@@ -6,6 +6,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const GenHtml = require("./lib/GenerateHTML");
 //variables
 var managerCounter = 0;
 let Team = [];
