@@ -2,11 +2,13 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 //Classes
-const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const GenHtml = require("./lib/GenerateHTML");
+const path = require("path");
+const dist_dir = path.resolve(__dirname, "dist");
+const distPath = path.join(dist_dir, "output.html");
 //variables
 var managerCounter = 0;
 let Team = [];
@@ -95,7 +97,8 @@ function start() {
       addRole();
     } else {
       console.log(Team);
-      // fs.writeFile("./dist/text.txt", Team);
+      fs.writeFileSync(distPath, GenHtml(Team), "utf-8");
+      console.log("Team Rendered");
       process.exit(0);
     }
   });
