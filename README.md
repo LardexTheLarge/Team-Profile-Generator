@@ -17,11 +17,14 @@ My program creates an html page that holds data created using inquirer prompts. 
 
 ## Installation
 
-Once the program is pulled into a VS code editor then in the terminal enter npm i so the respective npm files will load into your team generator file.
+Once the program is pulled into a VS code editor then in the terminal enter 'npm i' so the respective npm files will load into your team generator file.
 
 ## Usage
 
 Type node index.js into the terminal and answer the prompts. When the question to add more members you won't be allowed to enter more than one manager. Once you have added enough members select no for the last question and the html page will render to the output directive folder.
+
+![image](https://user-images.githubusercontent.com/100447639/187834198-bc3ced16-8769-49e3-99d6-ec7f275d48d7.png)
+
 
 ## Credits
 
