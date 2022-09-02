@@ -1,14 +1,17 @@
 //dependencies
 const inquirer = require("inquirer");
 const fs = require("fs");
-//Classes
+
+//Variables of Classes
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const GenHtml = require("./lib/GenerateHTML");
-const path = require("path");
+const GenHtml = require("./src/GenerateHTML");
+//path to files variables
+const path = require("path"); //module to call resolve and join
 const dist_dir = path.resolve(__dirname, "dist");
 const distPath = path.join(dist_dir, "output.html");
+
 //variables
 var managerCounter = 0;
 let Team = [];
@@ -90,20 +93,6 @@ const addTeam = {
   choices: ["Manager", "Intern", "Engineer"],
   name: "employeeMake",
 };
-
-function start() {
-  inquirer.prompt(menu).then((answer) => {
-    if (answer.teamMake == "Yes") {
-      addRole();
-    } else {
-      console.log(Team);
-      fs.writeFileSync(distPath, GenHtml(Team), "utf-8");
-      console.log("Team Rendered");
-      process.exit(0);
-    }
-  });
-}
-
 const menu = {
   type: "list",
   message: "Do you want a new Employee?",
@@ -111,10 +100,29 @@ const menu = {
   name: "teamMake",
 };
 
+//this function starts the prompts or renders the team to output.html when "No" is selected
+function start() {
+  inquirer.prompt(menu).then((answer) => {
+    if (answer.teamMake == "Yes") {
+      addRole();
+    } else {
+      console.log(Team);
+      fs.writeFileSync(distPath, GenHtml(Team), "utf-8"); //writeFileSync makes sure all other files are done
+      console.log("Team Rendered");
+      process.exit(0); // exits function once its complete
+    }
+  });
+}
+
+// adds the chosen role when selected in the prompts
 function addRole() {
+  //prompts addTeam then takes the answers from the manager questions
   inquirer.prompt(addTeam).then((answer) => {
+    //if "Manager" is selected and managerCounter is greater than 1
     if (answer.employeeMake === "Manager" && managerCounter < 1) {
+      //increase managerCounter
       managerCounter++;
+      //asks the questions in teamMembers.Manager then take the results and apply them to a new Manager Object
       inquirer.prompt(teamMembers.Manager).then((results) => {
         const manager = new Manager(
           results.managerName,
@@ -122,6 +130,7 @@ function addRole() {
           results.managerEmail,
           results.managerOffice
         );
+        //takes the new Manager object and pushes it to the Team array
         Team.push(manager);
         start();
       });
