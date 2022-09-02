@@ -25,6 +25,9 @@ Type node index.js into the terminal and answer the prompts. When the question t
 
 ![image](https://user-images.githubusercontent.com/100447639/187834198-bc3ced16-8769-49e3-99d6-ec7f275d48d7.png)
 
+Video Link:
+https://drive.google.com/file/d/1v-3RWV_NQO1D2mv7XFQG-B70vVhz2hB4/view
+
 
 ## Credits
 
